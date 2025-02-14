@@ -1,4 +1,83 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+:root{
+  --orange: #f07e5f;
+  --white: #ffffff;
+  --brown: #67452d;
+  --lightorange: #f19561;
+  --borderyellow: #f9bd00;
+  --yellowmid: #ffdeb9;
+  --backgroundyellow: #ffea79;
+}
+
+h1{
+  color: var(--brown);
+  font-family: "Pixelify Sans", serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.6rem;
+  margin: 0;  
+  text-align: center;
+}
+
+h2{
+  color: var(--orange);
+  font-family: "Pixelify Sans", serif;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0px;  
+  padding: 0px;
+}
+h3{
+  color: var(--brown);
+  font-family: "Pixelify Sans", serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2.6rem;
+  margin: 0;  
+  text-align: center;
+}
+
+.clock{
+  color: var(--brown);
+  font-family: "Pixelify Sans", serif;
+  font-size: 4.2rem;
+  font-style:normal;
+  font-weight: 700;
+  line-height: 2.6rem;
+  margin: 0;  
+  text-align: center;
+}
+
+.background{
+  background-color: var(--backgroundyellow);
+}
+.background_image{
+  border: 2px solid var(--borderyellow);
+}
+.button{
+  color: var(--orange);
+  font-family: "Pixelify Sans", serif;
+  background-color: var(--yellowmid);
+  border: 1px solid var(--orange);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  transition: 0.3s;
+
+}
+
+.button:hover{
+  transform: scale(1.11);
+}
 
