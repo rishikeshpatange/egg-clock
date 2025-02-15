@@ -2,17 +2,17 @@ import { useRouter } from "next/router";
 import { Minus, X } from "lucide-react";
 
 const levels = [
-  { name: "Soft Boiled", time: 3, image: "/Images/egg.png" },
-  { name: "Medium Boiled", time: 6, image: "/Images/egg.png" },
-  { name: "Hard Boiled", time: 9, image: "/Images/egg.png" },
-  { name: "Very Hard", time: 12, image: "/Images/egg.png" },
+  { name: "Soft Boiled", time: 5, image: "/Images/egg1.png" },
+  { name: "Hard Boiled", time: 10, image: "/Images/egg2.png" },
+  { name: "half boiled ", time: 7, image: "/Images/egg3.png" },
+  { name: "demo", time: 30 / 60, image: "/Images/demo.png" },
 ];
 
 export default function Levels() {
   const router = useRouter();
 
   return (
-    <div className="h-screen flex items-center justify-center bg-white">
+    <div className="h-screen flex items-center justify-center bg-white p-3">
       <div className="w-96 h-96 shadow-lg flex flex-col items-center rounded-md background">
         {/* Header */}
         <div className="w-full flex justify-between items-center px-3 py-2 rounded-tl-md rounded-tr-md">
@@ -34,9 +34,9 @@ export default function Levels() {
 
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center justify-center text-white w-full h-full">
-            <h3 className="mb-3 text-2xl ">
+            <h4 className="mb-3 ">
               What are we making today?
-            </h3>
+            </h4>
             <div className="grid grid-cols-2 gap-4">
               {levels.map((level) => (
                 <button
@@ -47,7 +47,7 @@ export default function Levels() {
                   <img
                     src={level.image}
                     alt={level.name}
-                    className="w-14 h-17  transition-transform duration-300 hover:scale-[1.11]"
+                    className="w-19 h-20  transition-transform duration-300 hover:scale-[1.11]"
                   />
                   <h3> {level.name}</h3>
                  
