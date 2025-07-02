@@ -29,6 +29,7 @@ export default async function handler(req, res) {
         receivedMethod: req.method,
         receivedHeaders: Object.fromEntries(
           Object.entries(req.headers).filter(([k]) => !k.startsWith('x-vercel'))
+        )  // <-- Missing parenthesis added here
       }
     });
   }
