@@ -1,20 +1,28 @@
 export default async function handler(req, res) {
-  const workerUrl = `https://ai-gateway-proxy.rishikeshpatange128.workers.dev${req.url.replace('/api/proxy', '')}`;
-  
-  const headers = {
-    'Content-Type': 'application/json',
-    'x-api-key': 'demo123',
-    'x-user-id': req.headers['x-user-id'] || 'valid_user' // Forward the header
-  };
-
   try {
-    const response = await fetch(workerUrl, {
+    // 1. Forward to Cloudflare Worker
+    const workerResponse = await fetch('https://ai-gateway-proxy.rishikeshpatange128.workers.dev', {
       method: req.method,
-      headers: headers,
-      body: req.body ? JSON.stringify(req.body) : undefined
+      headers: {
+        'x-api-key': 'demo123', // Required by your Worker
+        'x-user-id': req.headers['x-user-id'] || 'premium_user', // Forward or default
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(req.body) // Forward original body
     });
-    res.status(response.status).json(await response.json());
+
+    // 2. Return Worker's response
+    res.status(workerResponse.status).json(await workerResponse.json());
+    
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    // 3. Error handling
+    res.status(500).json({
+      error: "Proxy failed",
+      message: error.message,
+      debug: {
+        receivedHeaders: req.headers,
+        receivedBody: req.body
+      }
+    });
   }
 }
