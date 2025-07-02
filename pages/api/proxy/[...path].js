@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  // Block GET requests explicitly
+  // Block GET requests
   if (req.method === 'GET') {
     return res.status(400).json({
       error: "Use POST method",
