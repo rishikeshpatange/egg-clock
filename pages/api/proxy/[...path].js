@@ -1,27 +1,34 @@
 export default async function handler(req, res) {
+  // Block GET requests explicitly
+  if (req.method === 'GET') {
+    return res.status(400).json({
+      error: "Use POST method",
+      example: {
+        curl: 'curl -X POST -H "Content-Type: application/json" -d \'{"messages":[{"content":"Hello"}]}\' https://your-domain.com/api/proxy'
+      }
+    });
+  }
+
   try {
-    // 1. Forward to Cloudflare Worker
     const workerResponse = await fetch('https://ai-gateway-proxy.rishikeshpatange128.workers.dev', {
-      method: req.method,
+      method: 'POST',
       headers: {
-        'x-api-key': 'demo123', // Required by your Worker
-        'x-user-id': req.headers['x-user-id'] || 'premium_user', // Forward or default
+        'x-api-key': 'demo123',
+        'x-user-id': req.headers['x-user-id'] || 'premium_user',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(req.body) // Forward original body
+      body: JSON.stringify(req.body)
     });
 
-    // 2. Return Worker's response
     res.status(workerResponse.status).json(await workerResponse.json());
-    
   } catch (error) {
-    // 3. Error handling
     res.status(500).json({
       error: "Proxy failed",
       message: error.message,
       debug: {
-        receivedHeaders: req.headers,
-        receivedBody: req.body
+        receivedMethod: req.method,
+        receivedHeaders: Object.fromEntries(
+          Object.entries(req.headers).filter(([k]) => !k.startsWith('x-vercel'))
       }
     });
   }
