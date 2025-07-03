@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  // Extract client ID from path
+  // Extract client ID from
   const { params } = req.query;
   const clientId = Array.isArray(params) ? params[0] : params;
 
